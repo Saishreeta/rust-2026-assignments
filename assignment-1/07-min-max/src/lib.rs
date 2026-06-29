@@ -1,6 +1,18 @@
 pub fn min_max(xs: &[i32]) -> Option<(i32, i32)> {
-    let _ = xs;
-    todo!("implement min_max")
+    if xs.is_empty() {
+        return None;
+    }
+    let mut min_val = xs[0];
+    let mut max_val = xs[0];
+    for &x in xs.iter().skip(1) {
+        if x < min_val {
+            min_val = x;
+        }
+        if x > max_val {
+            max_val = x;
+        }
+    }
+    Some((min_val, max_val))
 }
 
 #[cfg(test)]
@@ -50,3 +62,5 @@ mod tests {
         );
     }
 }
+   
+    
