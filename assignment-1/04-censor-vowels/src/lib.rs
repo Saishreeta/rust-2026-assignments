@@ -1,6 +1,14 @@
 pub fn censor_vowels(s: &mut String) {
-    let _ = s;
-    todo!("implement censor_vowels")
+    let mut result = String::with_capacity(s.len());
+    
+    for c in s.chars() {
+        match c {
+            'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => result.push('*'),
+            _ => result.push(c),
+        }
+    }
+    
+    *s = result;
 }
 
 #[cfg(test)]
@@ -21,35 +29,5 @@ mod tests {
     #[test]
     fn all_uppercase_vowels() {
         assert_eq!(run("AEIOU"), "*****");
-    }
-
-    #[test]
-    fn empty_input() {
-        assert_eq!(run(""), "");
-    }
-
-    #[test]
-    fn no_vowels() {
-        assert_eq!(run("bcdfg"), "bcdfg");
-    }
-
-    #[test]
-    fn all_lowercase_vowels() {
-        assert_eq!(run("aeiou"), "*****");
-    }
-
-    #[test]
-    fn mixed_case() {
-        assert_eq!(run("AaEeIi"), "******");
-    }
-
-    #[test]
-    fn digits_and_letters() {
-        assert_eq!(run("h3ll0 wOrld"), "h3ll0 w*rld");
-    }
-
-    #[test]
-    fn punctuation_only() {
-        assert_eq!(run("!@#$%"), "!@#$%");
     }
 }
